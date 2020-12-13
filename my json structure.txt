@@ -1,0 +1,86 @@
+gameinfo.json	// 초기 설정후 변하지않는것
+{
+	info : {
+		canvas : {
+			width : _
+			height : _
+		}
+		ball : {
+			color : _
+			radius : _
+			strokecolor : _
+			strokesize : _
+		},
+		laser : {
+			x : _
+			y : _
+			vector : { x : _ , y : _ }
+			color : _
+		},
+		plate : {
+			color : _
+			width : _
+			height : _
+		},
+		wave : {
+			color : _
+			speed : _
+			nums : _
+			startpoint : _
+			pinspeed : _
+		}
+		maxlap : _ 
+	},
+	ball : [
+		{ x : _ , y : _ }
+		...
+	]
+}
+
+user[NUMBER]result.json
+{
+	plate : [
+		{ x : _ , y : _ , angle : _ }
+		...
+	]
+}
+
+user[NUMBER]final.json
+{
+	hit_point : [
+		{ x : _ , y : _ }
+		...
+	],
+	hit_ball : [	// ball의 index
+		_ ,
+		...
+	]
+}
+
+USER_[NUMBER].json
+{
+	me : "user[NUMBER]",
+	winner : "user[NUMBER]",
+	gameinfo : gameinfo.json,
+	lap : _ ,
+	user1 : {
+		useroutput : [	// useroutput, userresult 들의 길이는 lap과 같다
+			user1result.json
+			...
+		],
+		userresult : [
+			user1final.json
+			...
+		]
+	},
+	user2 : {
+		useroutput : [	// useroutput, userresult 들의 길이는 lap과 같다
+			user2result.json	
+			...
+		],
+		userresult : [
+			user2final.json
+			...
+		]
+	}
+}
