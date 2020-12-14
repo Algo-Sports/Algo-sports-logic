@@ -1,3 +1,4 @@
+const process = require("process");
 const flatten = require("@flatten-js/core");
 const fs = require("fs");
 const Ball = require("./ball.js");
@@ -6,13 +7,14 @@ const Wall = require("./wall.js");
 const Laser = require("./laser.js");
 
 
-// gameinfo, usernumber, usrresult 는 인자값으로 들어올것이다.
-const gameinfo = JSON.parse(fs.readFileSync("./gameinfo.json"))
-let user = "user1";
-let usrresult = {};
-usrresult.plate = []
-usrresult.plate[0] = {x:200,y:450, angle:20};
-usrresult.plate[1] = {x:200,y:450, angle:160};
+// gameinfo, usrresult 는 인자값으로 들어올것이다.
+
+if(process.argv.length == 4){
+    
+}
+else{return}
+const gameinfo = JSON.parse(process.argv[2]);
+const usrresult = JSON.parse(process.argv[3]);
 // usrresult 더미데이터
 
 
@@ -35,24 +37,28 @@ result.hit_point = [];
 let cnt = 0;
 let flag = true;
 let wallhit;
+let hitplate = -1;
 while(flag){
     flag = false;
     wallhit = walls.isCollide(laser);
     let collide = wallhit;
-    for(let i of plates){
-        let tmp = i.isCollide(laser);
+    for(let i = 0;i< plates.length;i++){
+        if(i == hitplate) continue;
+        let tmp = plates[i].isCollide(laser);
         if(tmp[0] <= collide[0]){
             flag = true;
             collide = tmp;
+            hitplate = i;
         }
     }
     if(flag){
         result.hit_point[cnt++] = {x:collide[1].x, y:collide[1].y};
-        let platevector = new flatten.Vector(collide[2].ps, collide[2].pe);
-        let v1 = new flatten.Vector(platevector.y, -platevector.x);
-        let v2 = new flatten.Vector(-platevector.y,platevector.x);
-        v1 = laser.point.distanceTo(collide[1].clone().translate(v1)) < laser.point.distanceTo(collide[1].clone().translate(v2)) ? v1.normalize() : v2.normalize();
-        // debugger;
+        // let platevector = new flatten.Vector(collide[2].ps, collide[2].pe);
+        // let v1 = new flatten.Vector(platevector.y, -platevector.x);
+        // let v2 = new flatten.Vector(-platevector.y,platevector.x);
+        // v1 = laser.point.distanceTo(collide[1].clone().translate(v1)) < laser.point.distanceTo(collide[1].clone().translate(v2)) ? v1.normalize() : v2.normalize();
+
+        let v1 = collide[2].normalize();
         v1 = laser.getVector().add(v1.multiply(2*laser.getVector().invert().dot(v1)));
         laser = new Laser(collide[1].x,collide[1].y, Laser.getvfromVector(v1));
     }
@@ -77,8 +83,4 @@ result.hit_ball = [...ballset];
 
 
 
-console.log(result);
-
-
-
-fs.writeFileSync("./"+user+"result.json", JSON.stringify(result));
+console.log(JSON.stringify(result));

@@ -19,6 +19,10 @@ class Plate extends collide{
         let leftsegment = new flatten.Segment(this.points[0], this.points[3]);
         let rightsegment = new flatten.Segment(this.points[1], this.points[2]);
         this.segments = [upsegment, downsegment, leftsegment, rightsegment];
+        this.normalvectors = [new flatten.Vector(this.points[3],this.points[0])
+            , new flatten.Vector(this.points[0],this.points[3])
+            , new flatten.Vector(this.points[1],this.points[0])
+            , new flatten.Vector(this.points[0],this.points[1])]
     }
 
 }

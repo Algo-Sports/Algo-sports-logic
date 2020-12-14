@@ -1,7 +1,7 @@
 {
     "canvas":{
         "width" : 1000,
-        "height" : 900
+        "height" : 800
     },
     "ball" : {
         "color" : "#78E1D6",
@@ -12,7 +12,7 @@
     },
     "laser" : {
         "x" : 900,
-        "y" : 450,
+        "y" : 400,
         "vector" : { "x" : -1, "y" : 0},
         "color" : "red"
     },

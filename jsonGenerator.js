@@ -43,7 +43,7 @@ module.exports.gameinfo = (canvas, ball, laser, plate, wave, lapnum) => {
     let ret = {};
     let balloons = [];
     for (let i = 0; i < ball.num; i++) {
-        balloons.push([randomInt(1000), randomInt(800)]);
+        balloons.push([randomInt(canvas.width), randomInt(canvas.height)]);
     }
 
     ret.info = {};
